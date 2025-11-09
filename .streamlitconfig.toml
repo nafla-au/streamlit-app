@@ -1,0 +1,6 @@
+[theme]
+primaryColor = "#1E3A8A"              # Aksen & tombol utama
+backgroundColor = "#F8FAFC"           # Background utama (putih kebiruan)
+secondaryBackgroundColor = "#E0E7FF"  # Background sidebar (biru lembut)
+textColor = "#0F172A"                 # Warna teks gelap kebiruan
+font = "sans serif"
