@@ -23,8 +23,11 @@ st.set_page_config(
 # ==============================
 # Load Model
 # ==============================
-svm_model = joblib.load("C:/Users/nafla/OneDrive/Documents/00.SKRIPSI/DATASET/svm_tam_model.pkl")
-vectorizer = joblib.load("C:/Users/nafla/OneDrive/Documents/00.SKRIPSI/DATASET/tfidf_vectorizer.pkl")
+import os
+
+current_dir = os.path.dirname(__file__)
+svm_model = joblib.load(os.path.join(current_dir, "svm_tam_model.pkl"))
+vectorizer = joblib.load(os.path.join(current_dir, "tfidf_vectorizer.pkl"))
 
 kolom_aspek = ["PU", "PEOU", "Attitude", "Intention", "ActualUse"]
 
