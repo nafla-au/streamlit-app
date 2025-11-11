@@ -28,8 +28,8 @@ import os
 
 # Tentukan path relatif
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "model", "svm_tam_model.pkl")
-VECTORIZER_PATH = os.path.join(BASE_DIR, "model", "tfidf_vectorizer.pkl")
+MODEL_PATH = os.path.join(BASE_DIR, "svm_tam_model.pkl")
+VECTORIZER_PATH = os.path.join(BASE_DIR, "tfidf_vectorizer.pkl")
 
 # Load model dan vectorizer
 svm_model = joblib.load(MODEL_PATH)
