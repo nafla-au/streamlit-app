@@ -134,11 +134,12 @@ elif menu == "Prediksi dari File CSV":
 
     uploaded_file = st.file_uploader("Upload file CSV ulasan", type=["csv"])
     if uploaded_file is not None:
-    try:
-        data = pd.read_csv(uploaded_file, encoding="utf-8")
-    except UnicodeDecodeError:
-        data = pd.read_csv(uploaded_file, encoding="latin1")
-        
+        try:
+            data = pd.read_csv(uploaded_file, encoding="utf-8")
+        except UnicodeDecodeError:
+            uploaded_file.seek(0)
+            data = pd.read_csv(uploaded_file, encoding="latin1")
+
         if "ulasan" in data.columns:
             with st.spinner("🔍 Sedang memproses prediksi..."):
                 X = vectorizer.transform(data["ulasan"].astype(str))
@@ -146,7 +147,6 @@ elif menu == "Prediksi dari File CSV":
                 pred_df = pd.DataFrame(preds, columns=kolom_aspek)
                 hasil = pd.concat([data, pred_df], axis=1)
 
-            # Pesan sukses berwarna biru navy
             st.markdown(
                 """
                 <div style='background-color:#1E3A8A; color:white; padding:12px; border-radius:8px; text-align:center;'>
@@ -158,7 +158,6 @@ elif menu == "Prediksi dari File CSV":
 
             st.dataframe(hasil)
 
-            # Tombol download hasil
             csv = hasil.to_csv(index=False).encode("utf-8")
             st.download_button(
                 label="⬇️ Download Hasil Prediksi",
