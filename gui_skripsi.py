@@ -37,6 +37,15 @@ vectorizer = joblib.load(VECTORIZER_PATH)
 
 kolom_aspek = ["PU", "PEOU", "Attitude", "Intention", "ActualUse"]
 
+label_aspek = {
+    "PU": "Kebergunaan",
+    "PEOU": "Kemudahan Penggunaan",
+    "Attitude": "Sikap",
+    "Intention": "Niat Menggunakan",
+    "ActualUse": "Penggunaan Aktual",
+}
+
+
 # ==============================
 # Tampilan Header
 # ==============================
@@ -89,7 +98,10 @@ if menu == "Prediksi Manual":
         if ulasan.strip():
             X_input = vectorizer.transform([ulasan])
             y_pred = svm_model.predict(X_input)[0]
-            hasil = {kolom_aspek[i]: int(y_pred[i]) for i in range(len(kolom_aspek))}
+            hasil = {
+                label_aspek[kolom_aspek[i]]: int(y_pred[i])
+                for i in range(len(kolom_aspek))
+            }
 
             st.markdown(
                 """
@@ -145,6 +157,7 @@ elif menu == "Prediksi dari File CSV":
                 X = vectorizer.transform(data["ulasan"].astype(str))
                 preds = svm_model.predict(X)
                 pred_df = pd.DataFrame(preds, columns=kolom_aspek)
+                pred_df = pred_df.rename(columns=label_aspek)
                 hasil = pd.concat([data, pred_df], axis=1)
 
             st.markdown(
