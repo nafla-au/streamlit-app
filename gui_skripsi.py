@@ -38,11 +38,11 @@ vectorizer = joblib.load(VECTORIZER_PATH)
 kolom_aspek = ["PU", "PEOU", "Attitude", "Intention", "ActualUse"]
 
 label_aspek = {
-    "PU": "Kebergunaan",
-    "PEOU": "Kemudahan Penggunaan",
-    "Attitude": "Sikap",
-    "Intention": "Niat Menggunakan",
-    "ActualUse": "Penggunaan Aktual",
+    "PU": "PU (Kebergunaan)",
+    "PEOU": "PEOU (Kemudahan Penggunaan)",
+    "Attitude": "Attitude (Sikap)",
+    "Intention": "Intention (Niat Menggunakan)",
+    "ActualUse": "Actual Use (Penggunaan Aktual)",
 }
 
 
