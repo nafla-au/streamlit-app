@@ -134,8 +134,11 @@ elif menu == "Prediksi dari File CSV":
 
     uploaded_file = st.file_uploader("Upload file CSV ulasan", type=["csv"])
     if uploaded_file is not None:
-        data = pd.read_csv(uploaded_file)
-
+    try:
+        data = pd.read_csv(uploaded_file, encoding="utf-8")
+    except UnicodeDecodeError:
+        data = pd.read_csv(uploaded_file, encoding="latin1")
+        
         if "ulasan" in data.columns:
             with st.spinner("🔍 Sedang memproses prediksi..."):
                 X = vectorizer.transform(data["ulasan"].astype(str))
